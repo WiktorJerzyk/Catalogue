@@ -4,6 +4,42 @@
     $c=""; //user password
     $d="catalogue"; //database
     
+    session_start();
+
+    //Ciasteczko, które sprawdza kto był ostatnio zalogowany, narazie utworzę je tutaj
+    setcookie("typeSession","0",time()+36000,"/");
+    setcookie("username","Wiktor",time()+36000,"/");
+    //Typ sesji 0 - niezalogowany
+    //typ sesji 1 - zalogowany wcześniej
+    //typ sesji 2 - admin
+
+    if(isset($_COOKIE['typeSession'])){
+        $_SESSION['typeSession']=$_COOKIE['typeSession'];
+    }
+    else{
+        $_COOKIE['typeSession']=0;
+    }
+
+    function userHandler($typeSession){
+        //Niezalogowany
+        if($typeSession==0){
+            echo '<a href="createAccount" class="linknav">Utwórz konto</a>';
+        }
+        else{
+            $username=$_COOKIE['username'];
+        }
+
+        //Zalogowany kiedyś
+        if($typeSession==1){
+            echo "<a href='accountPanel' class='linknav'>$username
+                
+            </a>";
+        }
+
+
+
+        //Admin - narazie pominę
+    }
 
 
 ?>
@@ -25,7 +61,7 @@
                 
             <a href="" class="linknav">Panel projektów</a>
 
-            <a href="" class="linknav">User</a>
+            <?php userHandler($_SESSION['typeSession'])?>
         </nav>
         
     </header>
@@ -60,13 +96,9 @@
         <section class="row-2">
             <h1>Szablony</h1>
             <article>Zanim zaczniesz tworzyć, sprawdź który szablon pasuje najlepiej do twojego katalogu:</article>
-            <article>
-                
-
-                <!--Narazie style do nich będą w plikach styl1.css, potem styl będzie dodawany z bazy danych, 
-                tak samo jak cały szablonik-->
+            <article id="templateContainer">
                 <?php
-                    
+
 
                     function templateShow($templateId,$a,$b,$c,$d){
                         $tconn = mysqli_connect($a,$b,$c,$d);
@@ -87,10 +119,12 @@
                         <style>'.$row[2].'</style>
                     </head>'.'<body>'.$row[1].'</body></html>'
                 );
-                    echo "<iframe src='index$templateId.html' width='600' height='400'></iframe>";
+                    echo "<div class='templateExample'><iframe src='index$templateId.html'></iframe></div>";
                    
             }
 
+            templateShow(1,$a,$b,$c,$d);
+            templateShow(1,$a,$b,$c,$d);
             templateShow(1,$a,$b,$c,$d);
                 ?>
             </article>

@@ -64,3 +64,16 @@ section h1{
 .row-2 article{
     width:100%;
 }
+#templateContainer{
+    display:flex;
+    flex-wrap:wrap;
+    padding:20px;
+}
+.templateExample{
+    width:30%;
+    margin:1%;
+}
+.templateExample iframe{
+    width:80%;
+    height:400px;
+}

@@ -119,13 +119,25 @@
                         <style>'.$row[2].'</style>
                     </head>'.'<body>'.$row[1].'</body></html>'
                 );
-                    echo "<div class='templateExample'><iframe src='index$templateId.html'></iframe></div>";
+                    
+                    echo "<div class='templateExample'>";
+                    echo "<iframe src='index$templateId.html' ></iframe>";
+                    echo "<div class=iframeHover>
+                        <form method='post'>
+                            <button type='submit' name='pickBtn$templateId' id='pickBtn$templateId' class='pick'>Wybierz</button>
+                        </form>
+                        
+                        <button type='submit' id='showkBtn$templateId' onclick='fullScreenShow($templateId)'  class='show'>Podgląd</button>
+                        
+                    </div>";
+                    echo "</div>";
                    
             }
+    
 
             templateShow(1,$a,$b,$c,$d);
-            templateShow(1,$a,$b,$c,$d);
-            templateShow(1,$a,$b,$c,$d);
+            templateShow(2,$a,$b,$c,$d);
+            templateShow(3,$a,$b,$c,$d);
                 ?>
             </article>
         </section>
@@ -137,5 +149,30 @@
     <footer>
 
     </footer>
+
+    <div class='bg' id="bg">
+            
+            
+    </div>
 </body>
+<script>
+function fullScreenShow(x){
+    let newIframe = document.createElement("iframe");
+    document.getElementById("bg").style.display="flex";
+    document.getElementById("bg").style.height="100%";
+    document.getElementById("bg").style.width="100%";
+    newIframe.src="index"+x+".html";
+    newIframe.id="tempChild";
+    
+    document.getElementById("bg").appendChild(newIframe);
+}
+
+
+bg.addEventListener("click",function (){
+    document.getElementById("tempChild").remove();   
+    document.getElementById("bg").style.display="none";
+    document.getElementById("bg").style.height="0%";
+    document.getElementById("bg").style.width="0%";
+})
+</script>
 </html>

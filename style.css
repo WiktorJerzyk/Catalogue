@@ -72,8 +72,61 @@ section h1{
 .templateExample{
     width:30%;
     margin:1%;
+    position: relative;
+    
 }
 .templateExample iframe{
     width:80%;
     height:400px;
+    border: solid 5px black;
+
+}
+#tempChild{
+    width:50%;
+    height:95%;
+    border: solid 5px black;
+}
+.show{
+    position:absolute;
+    bottom:30px;
+    left:15%;
+}
+.pick{
+    position:absolute;
+    bottom:30px;
+    right:15%;
+}
+.show, .pick{
+    padding:8px;
+    color:black;
+    background-color:#f1efe1 ;
+    border-radius: 8px;
+    font-size: 1.5em;
+    font-weight: 600;
+    opacity:0;
+}
+.templateExample:hover .show, .templateExample:hover .pick{
+    opacity:1;
+    transition: ease 0.4s;
+    
+}
+.templateExample:hover iframe{
+    filter:blur(3px);
+}
+.show:hover, .pick:hover{
+    background-color:#b4b4af ;
+    color:rgb(46, 37, 37);
+}
+.bg{
+    position:fixed;
+    
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 0%;
+    backdrop-filter: blur(10px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+
 }

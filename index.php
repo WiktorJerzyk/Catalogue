@@ -5,9 +5,9 @@
     $d="catalogue"; //database
     
     session_start();
-
+    
     //Ciasteczko, które sprawdza kto był ostatnio zalogowany, narazie utworzę je tutaj
-    setcookie("typeSession","0",time()+36000,"/");
+    setcookie("typeSession","1",time()+36000,"/");
     setcookie("username","Wiktor",time()+36000,"/");
     //Typ sesji 0 - niezalogowany
     //typ sesji 1 - zalogowany wcześniej
@@ -17,13 +17,13 @@
         $_SESSION['typeSession']=$_COOKIE['typeSession'];
     }
     else{
-        $_COOKIE['typeSession']=0;
+        $_SESSION['typeSession']=0;
     }
 
     function userHandler($typeSession){
-        //Niezalogowany
+        //Pierszy raz na stronie
         if($typeSession==0){
-            echo '<a href="createAccount" class="linknav">Utwórz konto</a>';
+            echo '<a href="createAccount.php" class="linknav">Zaloguj się</a>';
         }
         else{
             $username=$_COOKIE['username'];
@@ -31,7 +31,7 @@
 
         //Zalogowany kiedyś
         if($typeSession==1){
-            echo "<a href='accountPanel' class='linknav'>$username
+            echo "<a href='accountPanel' class='linknav'>Cześć! $username
                 
             </a>";
         }

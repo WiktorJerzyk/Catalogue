@@ -1,9 +1,6 @@
 <?php 
-    $a="127.0.0.1"; //Server address
-    $b="root"; //server user
-    $c=""; //user password
-    $d="catalogue"; //database
-    
+
+    include 'functions.php';
     session_start();
     
     //Ciasteczko, które sprawdza kto był ostatnio zalogowany, narazie utworzę je tutaj
@@ -19,27 +16,10 @@
     else{
         $_SESSION['typeSession']=0;
     }
+    //Admin unlocked:
+    $_SESSION['typeSession']=2;
 
-    function userHandler($typeSession){
-        //Pierszy raz na stronie
-        if($typeSession==0){
-            echo '<a href="createAccount.php" class="linknav">Zaloguj się</a>';
-        }
-        else{
-            $username=$_COOKIE['username'];
-        }
-
-        //Zalogowany kiedyś
-        if($typeSession==1){
-            echo "<a href='accountPanel' class='linknav'>Cześć! $username
-                
-            </a>";
-        }
-
-
-
-        //Admin - narazie pominę
-    }
+    
 
 
 ?>
@@ -122,14 +102,32 @@
                     
                     echo "<div class='templateExample'>";
                     echo "<iframe src='index$templateId.html' ></iframe>";
-                    echo "<div class=iframeHover>
-                        <form method='post'>
-                            <button type='submit' name='pickBtn$templateId' id='pickBtn$templateId' class='pick'>Wybierz</button>
-                        </form>
+                    echo "<div class='iframeHover'>
+                                <form method='post'>
+                                    <button type='submit' name='pickBtn$templateId' id='pickBtn$templateId' class='pick'>Wybierz</button>
+                                </form>
                         
-                        <button type='submit' id='showkBtn$templateId' onclick='fullScreenShow($templateId)'  class='show'>Podgląd</button>
+                            <button id='showkBtn$templateId' onclick='fullScreenShow($templateId)'  class='show'>Podgląd</button>
                         
                     </div>";
+                    
+                    //Buttony dla administratora
+
+                    if($_SESSION['typeSession']==2){
+
+                        
+                        echo "<div class='iframeHover'>
+                        <button class='showAdminbtn' onclick='adminEditorShow($templateId)'>Edytuj</button>
+                        <form method='post' action='edit.php'>
+                                    <button type='submit' name='editThis' id='editn$templateId' class='showAdminbtn' value='$templateId'>Edytuj</button>
+                                </form>
+
+
+                        </div>";
+                    }
+                    
+                    
+
                     echo "</div>";
                    
             }
@@ -141,10 +139,6 @@
                 ?>
             </article>
         </section>
-    
-           
-    
-
     </main>
     <footer>
 
@@ -156,6 +150,15 @@
     </div>
 </body>
 <script>
+
+bg.addEventListener("click",function (){
+    document.getElementById("tempChild").remove();   
+    document.getElementById("bg").style.display="none";
+    document.getElementById("bg").style.height="0%";
+    document.getElementById("bg").style.width="0%";
+})
+
+
 function fullScreenShow(x){
     let newIframe = document.createElement("iframe");
     document.getElementById("bg").style.display="flex";
@@ -168,11 +171,9 @@ function fullScreenShow(x){
 }
 
 
-bg.addEventListener("click",function (){
-    document.getElementById("tempChild").remove();   
-    document.getElementById("bg").style.display="none";
-    document.getElementById("bg").style.height="0%";
-    document.getElementById("bg").style.width="0%";
-})
+
+
+
+
 </script>
 </html>

@@ -2,10 +2,9 @@
 
     include 'functions.php';
     session_start();
-    
     //Ciasteczko, które sprawdza kto był ostatnio zalogowany, narazie utworzę je tutaj
-    setcookie("typeSession","1",time()+36000,"/");
-    setcookie("username","Wiktor",time()+36000,"/");
+    //setcookie("typeSession","1",time()+36000,"/");
+    //setcookie("username","Wiktor",time()+36000,"/");
     //Typ sesji 0 - niezalogowany
     //typ sesji 1 - zalogowany wcześniej
     //typ sesji 2 - admin
@@ -16,8 +15,10 @@
     else{
         $_SESSION['typeSession']=0;
     }
+
+    
     //Admin unlocked:
-    $_SESSION['typeSession']=2;
+    //$_SESSION['typeSession']=2;
 
     
 

@@ -3,29 +3,37 @@
     $b="root"; //server user
     $c=""; //user password
     $d="catalogue"; //database
-function userHandler($typeSession){
-        //Pierszy raz na stronie
-        if($typeSession==0){
-            echo '<a href="createAccount.php" class="linknav">Zaloguj się</a>';
+    function userHandler($typeSession) {
+        // Pierwszy raz na stronie
+        if ($typeSession == 0) {
+            echo '<a href="Account.php" class="linknav">Zaloguj się</a>';
+        } else {
+            // Pobieramy nazwę użytkownika z ciasteczka
+            $username = isset($_COOKIE['username']) ? $_COOKIE['username'] : 'Użytkownik';
         }
-        else{
-            $username=$_COOKIE['username'];
+    
+        // Zalogowany wcześniej
+        if ($typeSession == 1) {
+            echo "<div class='drop'>
+                    <button class='usrbtn'>$username</button>
+                    <div class='drop-content'>
+                        <a href='accountPanel.php' class='linknav'>Panel użytkownika</a>
+                        <a href='logout.php' class='linknav'>Wyloguj się</a>
+                    </div>
+                  </div>";
         }
-
-        //Zalogowany kiedyś
-        if($typeSession==1){
-            echo "<a href='accountPanel' class='linknav'>Cześć! $username
-                
-            </a>";
+        
+        // Typ sesji 2 - Admin
+        if ($typeSession == 2) {
+            echo "<div class='drop'>
+                    <button class='usrbtn'>Witaj, Adminie</button>
+                    <div class='drop-content'>
+                        <a href='logout.php' class='linknav'>Wyloguj się</a>
+                    </div>
+                  </div>";
         }
-        if($typeSession==2){
-            echo "Admin";
-        }
-
-
-
-        //Admin - narazie pominę
     }
+    
 
 
 

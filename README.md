@@ -2,6 +2,8 @@ Aby odpalić projekcik w najprosty sposób będzie potrzebny:
 * Serwer PHP (Najlepiej XAMMP)
 * Narzędzie do baz danych (najlepiej phpmyadmin i baza danych MySQL)
 * Komputer
+
+  
 Zalecany Sposób:
   Odpal XAMMP'a
   Sklonuj to repo do folderu HTDOCS
